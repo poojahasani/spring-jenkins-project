@@ -14,7 +14,8 @@ pipeline {
 
         stage('SCM Checkout')  {
             steps {
-                git credentialsId: 'githuncredentails', url: 'https://github.com/dscorpian29/spring-jenkins-project.git'
+                
+		git credentialsId: 'GIT_Cred', url: 'https://github.com/poojahasani/spring-jenkins-project.git'
             }
         } 
 
@@ -27,7 +28,7 @@ pipeline {
 		 
 		stage('Build Docker Imager'){
 		steps {
-        sh 'docker build -t dscorpian/spring-project:0.0.1 .'
+        sh 'docker build -t poojahasani/spring-project:0.0.1 .'
 	  }
               
 		} 
@@ -36,7 +37,7 @@ pipeline {
 		steps {
         withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'PASSWORD', usernameVariable: 'USER')]) {
     	sh 'docker login -u $USER -p $PASSWORD'
-	sh 'docker push dscorpian/spring-project:0.0.1'
+	sh 'docker push poojahasani/spring-project:0.0.1'
 }
 	  }
               
@@ -44,7 +45,7 @@ pipeline {
 		stage('Run Docker container '){
 		steps {
        
-    	sh 'docker run -it -d --name webapp -p 8090:8080 dscorpian/spring-project:0.0.1 '
+    	sh 'docker run -it -d --name webapp -p 8090:8080 poojahasani/spring-project:0.0.1 '
 	
 
 	  }
