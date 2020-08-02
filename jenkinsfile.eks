@@ -45,7 +45,7 @@ pipeline {
 		stage('Run Docker container '){
 		steps {
        
-    	sh 'docker run -it -d --name webapplicatn -p 8090:8080 poojahasani/spring-project:0.0.1 '
+    	sh 'docker run -it -d --name webapplicatnone -p 8090:8080 poojahasani/spring-project:0.0.1 '
 	
 
 	  }
